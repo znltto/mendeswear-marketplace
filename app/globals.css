@@ -1,24 +1,78 @@
-@import "tailwindcss";
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@theme {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  body {
+    @apply bg-mendes-white text-mendes-gray antialiased font-sans overflow-x-hidden;
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #F28C38 #F7FAFC; /* Firefox */
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* Estilo personalizado da barra de rolagem */
+  body::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  body::-webkit-scrollbar-track {
+    background: #F7FAFC;
+    border-radius: 10px;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    background-color: #F28C38;
+    border-radius: 10px;
+    border: 2px solid #F7FAFC;
+  }
+
+  body::-webkit-scrollbar-thumb:hover {
+    background-color: #D4A017;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes slideFade {
+    from { opacity: 0; transform: translateX(50px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes pulseGrow {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  .animate-slide-fade {
+    animation: slideFade 0.6s ease-out forwards;
+  }
+
+  .animate-pulse-grow:hover {
+    animation: pulseGrow 0.6s ease-in-out infinite;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 py-16;
+  }
+
+  .section-title {
+    @apply text-4xl font-bold text-mendes-dark text-center mb-12 flex items-center justify-center gap-2;
+  }
+
+  .section-divider {
+    @apply border-t border-mendes-light my-8;
+  }
 }
